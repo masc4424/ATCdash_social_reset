@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>-Dashboard-</title>
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/><!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+    <!-- ======= Styles ====== -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://kit.fontawesome.com/a1ccd8a2f2.js" crossorigin="anonymous"></script>
+    <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <script src="https://kendo.cdn.telerik.com/2023.1.117/js/kendo.all.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/bddbf16e05.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/interactiveJS/interactiveJS@v2.0.1/src/interactive.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/gh/interactiveJS/interactiveJS@v2.0.1/src/css/interactive.min.css" rel="stylesheet"/> -->
+</head>
+
+<style>
+    /* Styles for the dropdown menu */
+    .dropdown {
+    position: relative;
+    display: inline-block;
+    }
+    .dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    top: 40px;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 2px 5px rgb(138, 208, 219);
+    border-radius: 4px;
+    padding: 10px;
+    }
+    .dropdown:hover .dropdown-content {
+    display: block;
+    }
+    
+    /* Styles for the logout link */
+    .logout-link {
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+    display: block;
+    padding: 5px 10px;
+    transition: background-color 0.2s;
+    }
+    .logout-link:hover {
+    background-color: #8ad0db;
+    }
+    
+    /* Styles for the profile image */
+    .profile-image {
+    border-radius: 60%;
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+    }
+    .logout-btn {
+    float: left;
+    background-color: #8ad0db;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 2px;
+    }
+    
+    .user-info {
+    margin-left: 10px;
+    }
+    </style>
+
+<body>
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <!-- <ion-icon name="logo-apple"></ion-icon> -->
+                            <img src="{% static 'imgs/adamastech_logo.png' %}" height="60px" width="60px" style="margin-top: 15px;">
+                        </span>
+                        <span class="title"></span>
+                    </a>
+                </li>
+
+
+                <li id="bgshhi1" style="padding-left: 11px; padding-top: 20px; display: none;">
+                    <a onclick="iconCLICKSH1()">
+                        <span style="display: none;" id="icSHOW1">
+                            <div id="dash11-color">DA</div>
+                        </span>
+                        <span class="title"></span>
+                    </a>
+                </li>
+
+
+                <li id="bgshhi2" style="padding-left: 11px; padding-top: 20px; display: none;">
+                    <a onclick="iconCLICKSH2()">
+                        <span style="display: none;" id="icSHOW2">
+                            <div id="dash22-color">CU</div>
+                        </span>
+                        <span class="title"></span>
+                    </a>
+                </li>
+
+                <li id="bgshhi3" style="padding-left: 11px; padding-top: 20px; display: none;">
+                    <a onclick="iconCLICKSH3()">
+                        <span style="display: none;" id="icSHOW3">
+                            <div id="dash33-color">PU</div>
+                        </span>
+                        <span class="title"></span>
+                    </a>
+                </li>
+
+                <li id="bgshhi4" style="padding-left: 11px; padding-top: 20px; display: none;">
+                    <a onclick="iconCLICKSH4()">
+                        <span style="display: none;" id="icSHOW4">
+                            <div id="dash44-color">MD</div>
+                        </span>
+                        <span class="title"></span>
+                    </a>
+                </li>
+
+                <!-- <li style="padding-left: 11px; padding-top: 20px;">
+                    <a href="#">
+                        <span class="icon">
+
+                        </span>
+                        <span class="title"></span>
+                    </a>
+                </li>
+
+                <li style="padding-left: 11px; padding-top: 20px;">
+                    <a href="#">
+                        <span class="icon">
+
+                        </span>
+                        <span class="title"></span>
+                    </a>
+                </li> -->
+            </ul>
+        </div>
+
+
+        <!-- ========================= Main ==================== -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <!-- <ion-icon name="menu-outline"></ion-icon> -->
+                 </div>
+
+                      <!-- =============== user ================ -->
+
+                        <!-- <form action="{%url 'logout'%}" method="post">
+                            {% csrf_token %}
+                            <span class="dropdown">
+                                <button onclick="dropdownbtn()" class="logouton">Logout</button>
+                              </span>
+                        </form> -->
+
+                        <div class="dropdown">
+                            <div class="user-info">
+                                {{ user.get_full_name }}
+                            </div>
+                            <div class="dropdown-content">
+                                <a href="{%url 'logout'%}" class="logout-link" onclick="logout(event)">
+                                    <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+                                </a>
+                            </div>
+                        </div>
+
+            </div>
+
+
+            <!-- ======================= Cards ================== -->
+            <div class="cardBox nubeT" id="halua">
+                <a onclick="myFunction1()">
+                    <div class="card sortable" id="s1">
+                        <div>
+                            <div class="numbers">1,504</div>
+                            <div class="cardName">Total Students</div>
+                            <div><i class='fas fa-angle-up' style='font-size:48px;color:rgb(97, 245, 97)'></i><i
+                                    class='fas fa-angle-down' style='font-size:48px;color:red'></i></div>
+                        </div>
+
+                        <div class="iconBx">
+                            <ion-icon name="eye-outline"></ion-icon>
+                        </div>
+                    </div>
+                </a>
+
+                <div class="popup" id="myDIV1" style="display: none;">
+                    <div class="popup-header" style="background-color: #990099; font-family: Ubuntu, sans-serif;">
+                        <div class="d-flex">
+                            <div>
+                                <div id="dash-color">DA</div>
+                                <span style="padding-left: 10px;">Click here to move</span>
+                            </div>
+
+                            <div class="bttn-area">
+                                <button
+                                    style="float: right;border: none;background: none;padding-left: 6px;"
+                                    onclick="closeKARO1()"><i class="fa-solid fa-xmark"
+                                        style=" border: 5px solid red; border-radius: 40px; background-color: red; color: white; width: 32px;"></i></button>
+
+                                        <button
+                                    style="float: right;border: none;background: none;padding-left: 6px;"
+                                    onclick="max1()"><i onclick="changeIcon1()" id="icon1" class="fa-regular fa-square"
+                                        style=" border: 5px solid rgba(243, 239, 26, 0.911); border-radius: 40px; background-color: rgba(243, 239, 26, 0.911); color: rgb(241, 241, 241); width: 32px;"></i></button>
+
+                                <button style="float: right;border: none;background: none;"
+                                    onclick="hideeye()"><i class="fa-solid fa-minus fa-1x"
+                                        style="border: 5px solid green; border-radius: 40px; background-color: green; color: white; width: 32px;"></i></button>
+                            </div>
+
+                        </div>
+
+                        <!--<i class="fa-brands fa-windows fa-2x" style="padding-right:10px; float: left; margin-top: -4px;"></i>-->
+
+
+
+                        <p><img src="https://cdn.dribbble.com/users/3593/screenshots/2475280/linechart.gif"></p>
+
+                    </div>
+                </div>
+
+                <a onclick="myFunction2()">
+                    <div class="card sortable" id="s2">
+                        <div>
+                            <div class="numbers">80</div>
+                            <div class="cardName">Students in ()</div>
+                            <div><i class='fas fa-angle-up' style='font-size:48px;color:rgb(92, 230, 92)'></i><i
+                                    class='fas fa-angle-down' style='font-size:48px;color:red'></i></div>
+                        </div>
+
+                        <div class="iconBx">
+                            <ion-icon name="cart-outline"></ion-icon>
+                        </div>
+                    </div>
+                </a>
+
+                <div class="popup" id="myDIV2" style="display: none;">
+
+                    <div class="popup-header" style="background-color: #990099; font-family: Ubuntu, sans-serif;">
+                        <div class="d-flex">
+                            <div>
+                                <div id="dash2-color">CU</div>
+                                <span style="padding-left: 10px;">Click here to move</span>
+                            </div>
+
+                            <div class="bttn-area">
+                                <button
+                                    style="float: right;border: none;background: none;padding-left: 6px;"
+                                    onclick="closeKARO2()"><i class="fa-solid fa-xmark"
+                                        style=" border: 5px solid red; border-radius: 40px; background-color: red; color: white; width: 32px;"></i></button>
+
+                                        <button
+                                    style="float: right;border: none;background: none;padding-left: 6px;"
+                                    onclick="max2()"><i onclick="changeIcon2()" id="icon2" class="fa-regular fa-square"
+                                        style=" border: 5px solid rgba(243, 239, 26, 0.911); border-radius: 40px; background-color: rgba(243, 239, 26, 0.911); color: rgb(241, 241, 241); width: 32px;"></i></button>
+
+                                <button style="float: right;border: none;background: none;"
+                                    onclick="hidecart()"><i class="fa-solid fa-minus fa-1x"
+                                        style="border: 5px solid green; border-radius: 40px; background-color: green; color: white; width: 32px;"></i></button>
+                            </div>
+
+                        </div>
+                        <p><img src="https://cdn.dribbble.com/users/3593/screenshots/2475280/linechart.gif"></p>
+                    </div>
+                    <!-- <p><img src="https://i.pinimg.com/originals/20/81/27/2081270ee56f88c770bff6bd05867e05.gif"></p> -->
+                </div>
+
+                <a onclick="myFunction3()">
+                    <div class="card sortable" id="s3">
+                        <div>
+                            <div class="numbers">284</div>
+                            <div class="cardName">Students in ()</div>
+                            <div><i class='fas fa-angle-up' style='font-size:48px;color:rgb(83, 231, 83)'></i><i
+                                    class='fas fa-angle-down' style='font-size:48px;color:red'></i></div>
+                        </div>
+
+                        <div class="iconBx">
+                            <ion-icon name="chatbubbles-outline"></ion-icon>
+                        </div>
+                    </div>
+                </a>
+
+                <div class="popup" id="myDIV3" style="display: none;">
+                    <div class="popup-header" style="background-color: #990099; font-family: Ubuntu, sans-serif;">
+                        <div class="d-flex">
+                            <div>
+                                <div id="dash3-color">PU</div>
+                                <span style="padding-left: 10px;">Click here to move</span>
+                            </div>
+
+                            <div class="bttn-area">
+                                <button
+                                    style="float: right;border: none;background: none;padding-left: 6px;"
+                                    onclick="closeKARO3()"><i class="fa-solid fa-xmark"
+                                        style=" border: 5px solid red; border-radius: 40px; background-color: red; color: white; width: 32px;"></i></button>
+
+                                        <button
+                                    style="float: right;border: none;background: none;padding-left: 6px;"
+                                    onclick="max3()"><i onclick="changeIcon3()" id="icon3" class="fa-regular fa-square"
+                                        style=" border: 5px solid rgba(243, 239, 26, 0.911); border-radius: 40px; background-color: rgba(243, 239, 26, 0.911); color: rgb(241, 241, 241); width: 32px;"></i></button>
+
+                                <button style="float: right;border: none;background: none;"
+                                    onclick="hidechat()"><i class="fa-solid fa-minus fa-1x"
+                                        style="border: 5px solid green; border-radius: 40px; background-color: green; color: white; width: 32px;"></i></button>
+                            </div>
+
+                        </div>
+                        <p><img src="https://cdn.dribbble.com/users/3593/screenshots/2475280/linechart.gif"></p>
+                    </div>
+                </div>
+
+                <a onclick="myFunction4()">
+                    <div class="card sortable" id="s4" style="padding-bottom: 78px;">
+                        <div>
+                            <div class="numbers">$7,842</div>
+                            <div class="cardName">Errors</div>
+                        </div>
+
+                        <div class="iconBx">
+                            <i class='fas fa-exclamation-triangle' style='font-size:48px;color:rgb(252, 21, 21)'></i>
+                        </div>
+                    </div>
+                </a>
+
+                <div class="popup" id="myDIV4" style="display: none;">
+                    <div class="popup-header" style="background-color: #990099; font-family: Ubuntu, sans-serif;">
+                        <div class="d-flex">
+                            <div>
+                                <div id="dash4-color">MD</div>
+                                <span style="padding-left: 10px;">Click here to move</span>
+                            </div>
+
+                            <div class="bttn-area">
+                                <button
+                                    style="float: right;border: none;background: none;padding-left: 6px;"
+                                    onclick="closeKARO4()"><i class="fa-solid fa-xmark"
+                                        style=" border: 5px solid red; border-radius: 40px; background-color: red; color: white; width: 32px;"></i></button>
+
+                                        <button
+                                    style="float: right;border: none;background: none;padding-left: 6px;"
+                                    onclick="max4()"><i onclick="changeIcon4()" id="icon4" class="fa-regular fa-square"
+                                        style=" border: 5px solid rgba(243, 239, 26, 0.911); border-radius: 40px; background-color: rgba(243, 239, 26, 0.911); color: rgb(241, 241, 241); width: 32px;"></i></button>
+
+                                <button style="float: right;border: none;background: none;"
+                                    onclick="hideerror()"><i class="fa-solid fa-minus fa-1x"
+                                        style="border: 5px solid green; border-radius: 40px; background-color: green; color: white; width: 32px;"></i></button>
+                            </div>
+
+                        </div>
+                        <p><img src="https://cdn.dribbble.com/users/3593/screenshots/2475280/linechart.gif"></p>
+                    </div>
+                    <p>Move</p>
+                    <p>this</p>
+                    <p>DIV</p>
+                </div>
+
+            </div>
+
+            <!-- ================ Order Details List ================= -->
+            <div class="nubeT">
+                <div class="details ">
+                    <div class="recentOrders sortable">
+                        <div class="cardHeader">
+                            <h2>Student Details</h2>
+                            <a href="#" class="btn">View All</a>
+                        </div>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>fees</td>
+                                    <td>Payment</td>
+                                    <td>Status</td>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>Anos Voldigoad</td>
+                                    <td>$1200</td>
+                                    <td>Paid</td>
+                                    <td><span class="status delivered">Active</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Anos Voldigoad</td>
+                                    <td>$110</td>
+                                    <td>Due</td>
+                                    <td><span class="status pending">In-Active</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Anos Voldigoad</td>
+                                    <td>$1200</td>
+                                    <td>Paid</td>
+                                    <td><span class="status return">Sleep</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Anos Voldigoad</td>
+                                    <td>$620</td>
+                                    <td>Due</td>
+                                    <td><span class="status inProgress">Loding</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Anos Voldigoad</td>
+                                    <td>$1200</td>
+                                    <td>Paid</td>
+                                    <td><span class="status delivered">Active</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Anos Voldigoad</td>
+                                    <td>$110</td>
+                                    <td>Due</td>
+                                    <td><span class="status pending">Inactive</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Anos Voldigoad</td>
+                                    <td>$1200</td>
+                                    <td>Paid</td>
+                                    <td><span class="status return">Sleep</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Anos Voldigoad</td>
+                                    <td>$620</td>
+                                    <td>Due</td>
+                                    <td><span class="status inProgress">Loding</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- ================= New Customers ================ -->
+                    <div class="recentCustomers sortable">
+                        <div class="cardHeader">
+                            <h2>New Students</h2>
+                        </div>
+
+                        <table>
+                            <tr>
+                                <td width="60px">
+                                    <div class="imgBx"><img src="{% static 'imgs/customer02.jpg' %}" alt=""></div>
+                                </td>
+                                <td>
+                                    <h4>David <br> <span>Italy</span></h4>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="60px">
+                                    <div class="imgBx"><img src="{% static 'imgs/customer01.jpg' %}" alt=""></div>
+                                </td>
+                                <td>
+                                    <h4>Amit <br> <span>India</span></h4>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="60px">
+                                    <div class="imgBx"><img src="{% static 'imgs/customer02.jpg' %}" alt=""></div>
+                                </td>
+                                <td>
+                                    <h4>David <br> <span>Italy</span></h4>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="60px">
+                                    <div class="imgBx"><img src="{% static 'imgs/customer01.jpg' %}" alt=""></div>
+                                </td>
+                                <td>
+                                    <h4>Amit <br> <span>India</span></h4>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="60px">
+                                    <div class="imgBx"><img src="{% static 'imgs/customer02.jpg' %}" alt=""></div>
+                                </td>
+                                <td>
+                                    <h4>David <br> <span>Italy</span></h4>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="60px">
+                                    <div class="imgBx"><img src="{% static 'imgs/customer01.jpg' %}" alt=""></div>
+                                </td>
+                                <td>
+                                    <h4>Amit <br> <span>India</span></h4>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="60px">
+                                    <div class="imgBx"><img src="{% static 'imgs/customer01.jpg' %}" alt=""></div>
+                                </td>
+                                <td>
+                                    <h4>David <br> <span>Italy</span></h4>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="60px">
+                                    <div class="imgBx"><img src="{% static 'imgs/customer02.jpg' %}" alt=""></div>
+                                </td>
+                                <td>
+                                    <h4>Amit <br> <span>India</span></h4>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ================ Order Details List ================= -->
+                <div class="details">
+                    <div class="recentOrders sortable">
+                        <div class="cardHeader">
+                            <h2>Student Details</h2>
+                            <a href="#" class="btn">View All</a>
+                        </div>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>fees</td>
+                                    <td>Payment</td>
+                                    <td>Status</td>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>Anos Voldigoad</td>
+                                    <td>$1200</td>
+                                    <td>Paid</td>
+                                    <td><span class="status delivered">Active</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Anos Voldigoad</td>
+                                    <td>$110</td>
+                                    <td>Due</td>
+                                    <td><span class="status pending">In-Active</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Anos Voldigoad</td>
+                                    <td>$1200</td>
+                                    <td>Paid</td>
+                                    <td><span class="status return">Sleep</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Anos Voldigoad</td>
+                                    <td>$620</td>
+                                    <td>Due</td>
+                                    <td><span class="status inProgress">Loding</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Anos Voldigoad</td>
+                                    <td>$1200</td>
+                                    <td>Paid</td>
+                                    <td><span class="status delivered">Active</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Anos Voldigoad</td>
+                                    <td>$110</td>
+                                    <td>Due</td>
+                                    <td><span class="status pending">Inactive</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Anos Voldigoad</td>
+                                    <td>$1200</td>
+                                    <td>Paid</td>
+                                    <td><span class="status return">Sleep</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Anos Voldigoad</td>
+                                    <td>$620</td>
+                                    <td>Due</td>
+                                    <td><span class="status inProgress">Loding</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- ================= New Customers ================ -->
+                    <div class="recentCustomers sortable">
+                        <div class="cardHeader">
+                            <h2>New Students</h2>
+                        </div>
+
+                        <table>
+                            <tr>
+                                <td width="60px">
+                                    <div class="imgBx"><img src="{% static 'imgs/customer02.jpg' %}" alt=""></div>
+                                </td>
+                                <td>
+                                    <h4>David <br> <span>Italy</span></h4>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="60px">
+                                    <div class="imgBx"><img src="{% static 'imgs/customer01.jpg' %}" alt=""></div>
+                                </td>
+                                <td>
+                                    <h4>Amit <br> <span>India</span></h4>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="60px">
+                                    <div class="imgBx"><img src="{% static 'imgs/customer02.jpg' %}" alt=""></div>
+                                </td>
+                                <td>
+                                    <h4>David <br> <span>Italy</span></h4>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="60px">
+                                    <div class="imgBx"><img src="{% static 'imgs/customer01.jpg' %}" alt=""></div>
+                                </td>
+                                <td>
+                                    <h4>Amit <br> <span>India</span></h4>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="60px">
+                                    <div class="imgBx"><img src="{% static 'imgs/customer02.jpg' %}" alt=""></div>
+                                </td>
+                                <td>
+                                    <h4>David <br> <span>Italy</span></h4>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="60px">
+                                    <div class="imgBx"><img src="{% static 'imgs/customer01.jpg' %}" alt=""></div>
+                                </td>
+                                <td>
+                                    <h4>Amit <br> <span>India</span></h4>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="60px">
+                                    <div class="imgBx"><img src="{% static 'imgs/customer01.jpg' %}" alt=""></div>
+                                </td>
+                                <td>
+                                    <h4>David <br> <span>Italy</span></h4>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="60px">
+                                    <div class="imgBx"><img src="{% static 'imgs/customer02.jpg' %}" alt=""></div>
+                                </td>
+                                <td>
+                                    <h4>Amit <br> <span>India</span></h4>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========== Scripts =========  -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <script>
+        function asciiToHex(str) {
+            const arr1 = [];
+            for (let n = 0, l = str.length; n < l; n++) {
+                const hex = Number(str.charCodeAt(n)).toString(16);
+                arr1.push(hex);
+            } return arr1.join('');
+        }
+        document.getElementById('dash-color').style.background = '#' + asciiToHex('DAS');
+        document.getElementById('dash2-color').style.background = '#' + asciiToHex('CUS');
+        document.getElementById('dash3-color').style.background = '#' + asciiToHex('PUS');
+        document.getElementById('dash4-color').style.background = '#' + asciiToHex('MDS');
+
+        document.getElementById('dash11-color').style.background = '#' + asciiToHex('DAS');
+        document.getElementById('dash22-color').style.background = '#' + asciiToHex('CUS');
+        document.getElementById('dash33-color').style.background = '#' + asciiToHex('PUS');
+        document.getElementById('dash44-color').style.background = '#' + asciiToHex('MDS');
+    </script>
+    <!-- <script src="assets/js/interactive.min.js"></script> -->
+
+
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+      {% for flashmsg in messages %}
+        alertify.set('notifier','position', 'top-center');
+        alertify.success('{{ flashmsg }}');
+      {% endfor %}
+</script>
+
+</body>
+
+</html>
